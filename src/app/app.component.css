@@ -28,3 +28,9 @@
 .sidebar .sidebar-search-container {
     padding: 0 1rem;
 }
+
+/* MAIN */
+
+main {
+    padding-top: 12px;
+}
