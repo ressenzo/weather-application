@@ -1,0 +1,7 @@
+.weather-body {
+    padding-top: 10px;
+}
+
+.current-weather-temperature span {
+    display: block;
+}
