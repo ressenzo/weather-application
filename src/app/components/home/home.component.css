@@ -1,3 +1,12 @@
+.spinner-container {
+    margin-top: 35px;
+}
+
+.spinner-border {
+    width: 100px;
+    height: 100px;
+}
+
 .weather-body {
     padding-top: 10px;
 }
