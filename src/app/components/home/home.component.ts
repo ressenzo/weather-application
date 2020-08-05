@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CitiesService } from '../../services/cities.service';
 import { CurrentWeatherResponse } from '../../interfaces/current-weather-response.interface';
+import { CitiesBusiness } from '../../business/cities.business';
+import { CityLocalStorageInterface } from '../../interfaces/city-local-storage.interface';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,7 @@ export class HomeComponent implements OnInit {
   loading = true;
   imageUrl: string;
   
-  constructor(private citiesService: CitiesService) {}
+  constructor(private citiesBusines: CitiesBusiness, private citiesService: CitiesService) {}
   
   ngOnInit(): void {
     this.getCityWeatherByName();
@@ -26,5 +28,16 @@ export class HomeComponent implements OnInit {
       this.imageUrl = `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`;
       this.loading = false;
     });
+  }
+
+  addCity(id: number, name: string, country: string) {
+    
+    const city: CityLocalStorageInterface = {
+      country,
+      id,
+      name
+    };
+
+    this.citiesBusines.addCityToLocalStorage(city);
   }
 }

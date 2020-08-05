@@ -7,9 +7,29 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class CitiesBusiness {
 
-    public savedCities: Observable<Array<CityLocalStorageInterface>>;
+  private savedCitiesSubject: BehaviorSubject<Array<CityLocalStorageInterface>>;
+  public savedCities: Observable<Array<CityLocalStorageInterface>>;
 
-    constructor() {
-        this.savedCities = new BehaviorSubject<Array<CityLocalStorageInterface>>(JSON.parse(localStorage.getItem('cities'))).asObservable();
-    }
+  constructor() {
+    this.savedCitiesSubject = new BehaviorSubject<Array<CityLocalStorageInterface>>(JSON.parse(localStorage.getItem('cities')));
+    this.savedCities = this.savedCitiesSubject.asObservable();
+  }
+
+  addCityToLocalStorage(city: CityLocalStorageInterface) {
+    
+    let savedCities = this.getCitiesFromLocalStorage();
+
+    savedCities.push(city);
+
+    localStorage.setItem('cities', JSON.stringify(savedCities));
+
+    this.savedCitiesSubject.next(savedCities);
+  }
+
+  getCitiesFromLocalStorage() : Array<CityLocalStorageInterface> {
+
+    let savedCities = JSON.parse(localStorage.getItem('cities')) as Array<CityLocalStorageInterface>;
+
+    return savedCities;
+  }
 }

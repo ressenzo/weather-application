@@ -7,7 +7,10 @@
 
     <div *ngIf="!loading">
         <div class="weather-title">
-            <h4>{{ currentWeather.name }}, {{ currentWeather.sys.country }}</h4>
+            <h4>{{ currentWeather.name }}, {{ currentWeather.sys.country }}
+                <button class="btn btn-sm btn-secondary"
+                    (click)="addCity(currentWeather.id, currentWeather.name, currentWeather.sys.country)">Add city</button>
+            </h4>
         </div>
         
         <div class="weather-body">
