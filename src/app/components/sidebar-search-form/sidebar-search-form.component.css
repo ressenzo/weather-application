@@ -1,0 +1,11 @@
+input[type="text"]:focus {
+    box-shadow: none;
+    border-color: #6c757d;
+}
+
+button {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
