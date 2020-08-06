@@ -4,7 +4,8 @@ import { CityLocalStorageInterface } from '../../interfaces/city-local-storage.i
 
 @Component({
   selector: 'app-sidebar-saved-cities',
-  templateUrl: './sidebar-saved-cities.component.html'
+  templateUrl: './sidebar-saved-cities.component.html',
+  styleUrls: ['./sidebar-saved-cities.component.css']
 })
 export class SidebarSavedCitiesComponent implements OnInit {
 
@@ -20,5 +21,10 @@ export class SidebarSavedCitiesComponent implements OnInit {
         
         this.citiesBusiness.savedCities
         .subscribe((cities: Array<CityLocalStorageInterface>) => this.savedCities = cities);
+    }
+
+    showWeatherInformation(id: number) {
+        
+        this.citiesBusiness.getCityWeatherById(id);
     }
 }

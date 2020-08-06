@@ -1,0 +1,12 @@
+.nav-link {
+    display: inline-block;
+    padding-left: 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0px;
+    padding: 5px 16px 2px 16px;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+    opacity: .6;
+}

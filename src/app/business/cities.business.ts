@@ -54,6 +54,16 @@ export class CitiesBusiness {
     return false;
   }
 
+  getCityWeatherById(id: number) {
+
+    this.gettingCityWeatherSubject.next(true);
+    this.citiesService.getCityWeatherById(id).subscribe((currentWeather: CurrentWeatherResponse) => {
+
+      this.wantedCitySubject.next(currentWeather);
+      this.gettingCityWeatherSubject.next(false);
+    });
+  }
+
   getCityWeatherByName(name: string) {
 
     this.gettingCityWeatherSubject.next(true);
