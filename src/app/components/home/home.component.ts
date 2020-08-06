@@ -12,22 +12,28 @@ import { CityLocalStorageInterface } from '../../interfaces/city-local-storage.i
 export class HomeComponent implements OnInit {
 
   currentWeather: CurrentWeatherResponse;
-  loading = true;
+  loading = false;
   imageUrl: string;
   
-  constructor(private citiesBusines: CitiesBusiness, private citiesService: CitiesService) {}
+  constructor(private citiesBusines: CitiesBusiness) {}
   
   ngOnInit(): void {
     this.getCityWeatherByName();
+    this.getLoading();
   }
   
   getCityWeatherByName(): void {
-    
-    this.citiesService.getCityWeatherByName('London').subscribe((currentWeather: CurrentWeatherResponse) => {
-      this.currentWeather = currentWeather
-      this.imageUrl = `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`;
-      this.loading = false;
+
+    this.citiesBusines.wantedCity.subscribe((currentWeather: CurrentWeatherResponse) => {
+      if (currentWeather) {
+        this.currentWeather = currentWeather;
+        this.imageUrl = `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`;        
+      }
     });
+  }
+
+  getLoading() {
+    this.citiesBusines.gettingCityWeather.subscribe((isLoading: boolean) => this.loading = isLoading);
   }
 
   addCity(id: number, name: string, country: string) {

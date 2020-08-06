@@ -5,7 +5,11 @@
         </div>
     </div>
 
-    <div *ngIf="!loading">
+    <div *ngIf="!loading && !currentWeather">
+        <h4>Find for any city</h4>
+    </div>
+
+    <div *ngIf="!loading && currentWeather">
         <div class="weather-title">
             <h4>{{ currentWeather.name }}, {{ currentWeather.sys.country }}
                 <button class="btn btn-sm btn-secondary"

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CityLocalStorageInterface } from '../interfaces/city-local-storage.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { CurrentWeatherResponse } from '../interfaces/current-weather-response.interface';
+import { CitiesService } from '../services/cities.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +12,21 @@ export class CitiesBusiness {
   private savedCitiesSubject: BehaviorSubject<Array<CityLocalStorageInterface>>;
   public savedCities: Observable<Array<CityLocalStorageInterface>>;
 
-  constructor() {
+  private wantedCitySubject: BehaviorSubject<CurrentWeatherResponse>;
+  public wantedCity: Observable<CurrentWeatherResponse>;
+
+  private gettingCityWeatherSubject: BehaviorSubject<boolean>;
+  public gettingCityWeather: Observable<boolean>;
+
+  constructor(private citiesService: CitiesService) {
     this.savedCitiesSubject = new BehaviorSubject<Array<CityLocalStorageInterface>>(JSON.parse(localStorage.getItem('cities')));
     this.savedCities = this.savedCitiesSubject.asObservable();
+
+    this.wantedCitySubject = new BehaviorSubject<CurrentWeatherResponse>(null);
+    this.wantedCity = this.wantedCitySubject.asObservable();
+
+    this.gettingCityWeatherSubject = new BehaviorSubject<boolean>(false);
+    this.gettingCityWeather = this.gettingCityWeatherSubject.asObservable();
   }
 
   addCityToLocalStorage(city: CityLocalStorageInterface) {
@@ -22,6 +36,15 @@ export class CitiesBusiness {
     savedCities.push(city);
 
     this.saveCitiesInLocalStorage(savedCities);
+  }
+
+  getCityWeatherByName(name: string) {
+
+    this.gettingCityWeatherSubject.next(true);
+    this.citiesService.getCityWeatherByName(name).subscribe((currentWeather: CurrentWeatherResponse) => {
+      this.wantedCitySubject.next(currentWeather);
+      this.gettingCityWeatherSubject.next(false);
+    });
   }
 
   removeCityFromLocalStorage(id: number) {

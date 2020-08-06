@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { SidebarFormSearchComponent } from './components/sidebar-form-search/sidebar-form-search.component';
+import { SidebarSearchFormComponent } from './components/sidebar-search-form/sidebar-search-form.component';
 
 import { HttpIntercept } from './services/interceptor.service';
 
@@ -14,12 +15,14 @@ import { HttpIntercept } from './services/interceptor.service';
   declarations: [
     AppComponent,
     HomeComponent,
-    SidebarFormSearchComponent
+    SidebarSearchFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {
