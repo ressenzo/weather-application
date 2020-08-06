@@ -40,4 +40,9 @@ export class HomeComponent implements OnInit {
 
     this.citiesBusines.addCityToLocalStorage(city);
   }
+
+  removeCity(id: number) {
+
+    this.citiesBusines.removeCityFromLocalStorage(id);
+  }
 }

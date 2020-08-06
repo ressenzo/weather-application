@@ -21,9 +21,16 @@ export class CitiesBusiness {
 
     savedCities.push(city);
 
-    localStorage.setItem('cities', JSON.stringify(savedCities));
+    this.saveCitiesInLocalStorage(savedCities);
+  }
 
-    this.savedCitiesSubject.next(savedCities);
+  removeCityFromLocalStorage(id: number) {
+    
+    let savedCities = this.getCitiesFromLocalStorage();
+
+    let notRemovedCities = savedCities.filter(x => x.id !== id);
+
+    this.saveCitiesInLocalStorage(notRemovedCities);
   }
 
   getCitiesFromLocalStorage() : Array<CityLocalStorageInterface> {
@@ -31,5 +38,12 @@ export class CitiesBusiness {
     let savedCities = JSON.parse(localStorage.getItem('cities')) as Array<CityLocalStorageInterface>;
 
     return savedCities;
+  }
+
+  private saveCitiesInLocalStorage(cities: Array<CityLocalStorageInterface>) {
+
+    localStorage.setItem('cities', JSON.stringify(cities));
+
+    this.savedCitiesSubject.next(cities);
   }
 }
