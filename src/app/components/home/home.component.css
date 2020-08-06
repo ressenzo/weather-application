@@ -11,6 +11,10 @@
     padding-top: 10px;
 }
 
+.current-weather-temperature span {
+    display: block;
+}
+
 /* Icons to save or remove city */
 
 .bi:hover {
