@@ -12,10 +12,13 @@
     <div *ngIf="!loading && currentWeather">
         <div class="weather-title">
             <h4>{{ currentWeather.name }}, {{ currentWeather.sys.country }}
-                <button *ngIf="!cityWasAdded" class="btn btn-sm btn-secondary"
-                    (click)="addCity(currentWeather.id, currentWeather.name, currentWeather.sys.country)">Add city</button>
-                <button *ngIf="cityWasAdded" class="btn btn-sm btn-secondary"
-                    (click)="removeCity(currentWeather.id)">Remove city</button>
+
+                <span title="Add city" class="icon plus" *ngIf="!cityWasAdded" (click)="addCity(currentWeather.id, currentWeather.name, currentWeather.sys.country)">
+                    +
+                </span>
+                <span title="Remove city" class="icon minus" *ngIf="cityWasAdded" (click)="removeCity(currentWeather.id)">
+                    -
+                </span>
             </h4>
         </div>
         
