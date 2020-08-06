@@ -8,6 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SidebarSearchFormComponent } from './components/sidebar-search-form/sidebar-search-form.component';
+import { SidebarSavedCitiesComponent } from './components/sidebar-saved-cities/sidebar-saved-cities.component';
 
 import { HttpIntercept } from './services/interceptor.service';
 
@@ -15,7 +16,8 @@ import { HttpIntercept } from './services/interceptor.service';
   declarations: [
     AppComponent,
     HomeComponent,
-    SidebarSearchFormComponent
+    SidebarSearchFormComponent,
+    SidebarSavedCitiesComponent
   ],
   imports: [
     BrowserModule,

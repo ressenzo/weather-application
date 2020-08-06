@@ -1,0 +1,18 @@
+<h6 *ngIf="savedCities && savedCities.length > 0" class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+  Saved cities ({{savedCities.length}})
+</h6>
+
+<h6 *ngIf="!savedCities || savedCities.length === 0" class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+  No city saved
+</h6>
+
+<div *ngIf="savedCities && savedCities.length > 0">
+  <ul class="nav flex-column mb-2">
+    <li *ngFor="let city of savedCities" class="nav-item">
+      <a class="nav-link" href="#">
+        <span data-feather="file-text"></span>
+        {{ city.name }}, {{ city.country }}
+      </a>
+    </li>
+  </ul>
+</div>
