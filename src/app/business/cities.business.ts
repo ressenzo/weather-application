@@ -33,9 +33,25 @@ export class CitiesBusiness {
     
     let savedCities = this.getCitiesFromLocalStorage();
 
+    if (!savedCities) {
+      savedCities = []; 
+    }
+
     savedCities.push(city);
 
     this.saveCitiesInLocalStorage(savedCities);
+  }
+
+  cityAlreadyAdded(id: number): boolean {
+
+    let cities = this.getCitiesFromLocalStorage();
+
+    if (cities && cities.length > 0) {
+      const cityWasAdded = cities.filter(x => x.id === id);
+      return cityWasAdded.length > 0;
+    }   
+
+    return false;
   }
 
   getCityWeatherByName(name: string) {

@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   currentWeather: CurrentWeatherResponse;
   loading = false;
   imageUrl: string;
+  cityWasAdded = false;
   
   constructor(private citiesBusines: CitiesBusiness) {}
   
@@ -27,7 +28,8 @@ export class HomeComponent implements OnInit {
     this.citiesBusines.wantedCity.subscribe((currentWeather: CurrentWeatherResponse) => {
       if (currentWeather) {
         this.currentWeather = currentWeather;
-        this.imageUrl = `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`;        
+        this.imageUrl = `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`;
+        this.verifyIfCityIsAlreadyAdded(currentWeather.id);
       }
     });
   }
@@ -45,10 +47,17 @@ export class HomeComponent implements OnInit {
     };
 
     this.citiesBusines.addCityToLocalStorage(city);
+    this.verifyIfCityIsAlreadyAdded(id);
   }
 
   removeCity(id: number) {
 
     this.citiesBusines.removeCityFromLocalStorage(id);
+    this.verifyIfCityIsAlreadyAdded(id);
+  }
+  
+  verifyIfCityIsAlreadyAdded(id: number) {
+
+    this.cityWasAdded = this.citiesBusines.cityAlreadyAdded(id);
   }
 }
